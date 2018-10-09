@@ -1,11 +1,9 @@
 {
     "presets": [
-        "env",
-        "react",
-        "stage-0"
+        "@babel/preset-react",
+        "@babel/preset-env"
     ],
     "plugins": [
-        "transform-class-properties",
         [
             "import",
             {
