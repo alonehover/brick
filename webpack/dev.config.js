@@ -53,13 +53,7 @@ const ProdConfig = {
         new CleanWebpackPlugin([
             "dist/*"
         ], { root: process.cwd() }),  // option默认路径
-    ],
-    optimization: {
-        splitChunks: {
-            chunks: "all",
-        },
-        runtimeChunk: true
-    }
+    ]
 }
 
 module.exports = Object.assign({}, BaseConfig, ProdConfig);
