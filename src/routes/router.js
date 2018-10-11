@@ -1,4 +1,4 @@
-import * as Page from "../page";
+import Page from "../page";
 
 export default [
     {

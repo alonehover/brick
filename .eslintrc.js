@@ -5,7 +5,7 @@ module.exports = {
         "window": true
     },
     "rules": {
-        "indent": ["error", 4],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
         // 单引号还是双引号
         "quotes": ["error", "double"],
 
