@@ -1,9 +1,10 @@
-import * as Page from "../page"
+import * as Page from "../page";
 
 export default [
     {
         path: "/",
         exact: true,
-        component: Page.Home
-    }
-]
+        id: "首页",
+        component: Page.Home,
+    },
+];
