@@ -1,23 +1,26 @@
 import React from "react";
+import ToolMenuItem from "./toolMenuItem";
 
 import "./toolMenu.less";
 
-export default class ToolMenu extends React.Component {
+class ToolMenu extends React.Component {
     render() {
         return (
             <section className="tool-menu">
                 <h1>组件列表</h1>
-                <ul>
-                    <li>image</li>
-                    <li>Banner</li>
-                    <li>Multi banner</li>
-                    <li>Product 【M】</li>
-                    <li>Product 【L】</li>
-                    <li>Tab</li>
-                    <li>Navigation</li>
-                    <li>Text</li>
-                </ul>
+                <div>
+                    <ToolMenuItem name="Image" />
+                    <ToolMenuItem name="Banner" />
+                    <ToolMenuItem name="Multi banner" />
+                    <ToolMenuItem name="Product 【M】" />
+                    <ToolMenuItem name="Product 【L】" />
+                    <ToolMenuItem name="Tab" />
+                    <ToolMenuItem name="Navigation" />
+                    <ToolMenuItem name="Text" />
+                </div>
             </section>
         );
     }
 }
+
+export default ToolMenu;

@@ -5,6 +5,7 @@ import HTML5Backend from "react-dnd-html5-backend";
 
 // import Board from "../../components/checkerboard";
 import ToolMenu from "./components/toolMenu";
+import BuildArea from "./components/buildArea";
 
 import "./index.less";
 
@@ -38,6 +39,7 @@ class Home extends Component {
                         </Sider>
                         <Content style={{ minHeight: height }}>
                             {/* <Board knightPosition={[0, 0]} /> */}
+                            <BuildArea />
                         </Content>
                     </Layout>
                 </Layout>
