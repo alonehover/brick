@@ -21,11 +21,12 @@ const ProdConfig = {
                         loader: "css-loader",
                         options: {
                             sourceMap: true,
+                            modules: true,
                             importLoaders: 1
                         }
                     }, {
                         loader: "postcss-loader"
-                    },{
+                    }, {
                         loader: "less-loader",
                         options: { javascriptEnabled: true } // less 3.0 需要设置
                     }
@@ -64,11 +65,11 @@ const ProdConfig = {
                     name: "vendor",
                     test: "vendor",
                     enforce: true
-                },
+                }
             }
         },
         runtimeChunk: true
     }
-}
+};
 
 module.exports = Object.assign({}, BaseConfig, ProdConfig);

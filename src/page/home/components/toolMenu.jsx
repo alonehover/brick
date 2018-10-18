@@ -1,12 +1,12 @@
 import React from "react";
 import ToolMenuItem from "./toolMenuItem";
 
-import "./toolMenu.less";
+import style from "./toolMenu.less";
 
 class ToolMenu extends React.Component {
     render() {
         return (
-            <section className="tool-menu">
+            <section className={style.toolMenu}>
                 <h1>组件列表</h1>
                 <div>
                     <ToolMenuItem name="Image" />

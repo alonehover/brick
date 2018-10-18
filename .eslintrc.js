@@ -164,7 +164,7 @@ module.exports = {
         // 组件需要先定义再使用
         "react/jsx-no-undef": 2,
         // 避免使用findDOMNode，Facebook会弃用
-        "react/no-find-dom-node": 2,
+        // "react/no-find-dom-node": 2,
         // 禁止使用html保留字标签
         "react/no-unknown-property": 2
     }

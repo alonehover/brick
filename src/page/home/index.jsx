@@ -7,7 +7,7 @@ import HTML5Backend from "react-dnd-html5-backend";
 import ToolMenu from "./components/toolMenu";
 import BuildArea from "./components/buildArea";
 
-import "./index.less";
+import style from "./index.less";
 
 const { Header, Sider, Content } = Layout;
 
@@ -34,11 +34,15 @@ class Home extends Component {
                 <Layout>
                     <Header>Header</Header>
                     <Layout>
-                        <Sider className="editor-sider">
+                        <Sider className={style.editorSider}>
                             <ToolMenu />
                         </Sider>
-                        <Content style={{ minHeight: height }}>
-                            {/* <Board knightPosition={[0, 0]} /> */}
+                        <Content style={{ minHeight: height }} className={style.Content}>
+                            <div className={style.areaHead}>
+                                <div className={style.urlContent}>
+                                    https://bilili.stite
+                                </div>
+                            </div>
                             <BuildArea />
                         </Content>
                     </Layout>

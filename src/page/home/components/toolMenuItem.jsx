@@ -1,7 +1,7 @@
 import React from "react";
 import { DragSource } from "react-dnd";
 
-import "./toolMenu.less";
+import style from "./toolMenu.less";
 
 const cardSource = {
     beginDrag(props) {
@@ -24,7 +24,11 @@ class ToolMenu extends React.Component {
     render() {
         const { isDragging, connectDragSource, name } = this.props;
         return connectDragSource(
-            <div className="side-menu-item">{name}{isDragging ? "*" : ""}</div>
+            <div
+                className={style.sideMenuItem}
+                style={{ opacity: isDragging ? 0.4 : 1}}
+            >{name}
+            </div>
         );
     }
 }
