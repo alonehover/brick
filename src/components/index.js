@@ -1,5 +1,5 @@
-import Board from "./checkerboard";
+import Image from "./image";
 
 export default {
-    Board
+    Image
 };

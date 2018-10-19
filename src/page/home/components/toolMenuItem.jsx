@@ -26,8 +26,8 @@ class ToolMenu extends React.Component {
         return connectDragSource(
             <div
                 className={style.sideMenuItem}
-                style={{ opacity: isDragging ? 0.4 : 1}}
-            >{name}
+                style={{ opacity: isDragging ? 0.4 : 1}}>
+                {name}
             </div>
         );
     }

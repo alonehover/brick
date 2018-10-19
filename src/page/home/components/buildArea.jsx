@@ -2,66 +2,11 @@ import * as React from "react";
 import {
     DropTarget
 } from "react-dnd";
-import { findDOMNode } from "react-dom";
-import ToolMenuItem from "./toolMenuItem";
+import Brick from "../../../components";
 
 const boxTarget = {
     drop() {
         return { name: "Area" };
-    },
-    hover(props, monitor, component) {
-        if (!component) {
-            return null;
-        }
-
-        // console.log(props);
-        const dragIndex = monitor.getItem().index;
-        const hoverIndex = props.index;
-
-        // console.log(dragIndex);
-        // Don't replace items with themselves
-        if (dragIndex === hoverIndex) {
-            return;
-        }
-
-        // Determine rectangle on screen
-        const hoverBoundingRect = findDOMNode(
-            component,
-        ).getBoundingClientRect();
-
-        // Get vertical middle
-        const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-        console.log(hoverMiddleY);
-
-        // Determine mouse position
-        const clientOffset = monitor.getClientOffset();
-
-        // Get pixels to the top
-        const hoverClientY = (clientOffset).y - hoverBoundingRect.top;
-
-        // Only perform the move when the mouse has crossed half of the items height
-        // When dragging downwards, only move when the cursor is below 50%
-        // When dragging upwards, only move when the cursor is above 50%
-
-        // Dragging downwards
-        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-            return;
-        }
-
-        // Dragging upwards
-        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-            return;
-        }
-
-        // Time to actually perform the action
-        props.moveCard(dragIndex, hoverIndex);
-
-        // Note: we're mutating the monitor item here!
-        // Generally it's better to avoid mutations,
-        // but it's good here for the sake of performance
-        // to avoid expensive index searches.
-        monitor.getItem().index = hoverIndex;
     }
 };
 
@@ -80,12 +25,25 @@ class BuildArea extends React.Component {
         super(props);
 
         this.state = {
-            tree: []
+            tree: [{
+                plugin: "Image",
+                name: "image",
+                id: 1
+            }, {
+                plugin: "Image",
+                name: "image",
+                id: 2
+            }, {
+                plugin: "Image",
+                name: "image",
+                id: 3
+            }]
         };
     }
 
     render() {
         const { canDrop, isOver, connectDropTarget } = this.props;
+        const { tree } = this.state;
         const isActive = canDrop && isOver;
 
         let border = "1px solid #ccc";
@@ -99,13 +57,26 @@ class BuildArea extends React.Component {
             <div className={style.areaMain}>
                 {connectDropTarget && connectDropTarget(
                     <div style={{border}} className={style.buildArea}>
-                        <ToolMenuItem name="image1" index="1" />
-                        <ToolMenuItem name="image2" index="2" />
-                        <ToolMenuItem name="image3" index="2" />
+                        {tree.map((item, index) => {
+                            return (
+                                <Brick.Image
+                                    name={item.name}
+                                    index={index}
+                                    key={item.id}
+                                    moveBrick={this.moveBrick}
+                                />);
+                        })}
                     </div>
                 )}
             </div>
         );
+    }
+
+    moveBrick = (dragIndex, hoverIndex) => {
+        console.log(dragIndex, hoverIndex);
+        const tree = Object.assign({}, this.state.tree);
+        tree[1].name = "img";
+        console.log(tree, this.state.tree);
     }
 }
 
