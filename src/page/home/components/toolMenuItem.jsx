@@ -16,7 +16,7 @@ const cardSource = {
     }
 };
 
-@DragSource("MenuItem", cardSource, (connect, monitor) => ({
+@DragSource("Image", cardSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
 }))

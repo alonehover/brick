@@ -2,6 +2,7 @@ import * as React from "react";
 import {
     DropTarget
 } from "react-dnd";
+import update from "immutability-helper";
 import Brick from "../../../components";
 
 const boxTarget = {
@@ -27,16 +28,19 @@ class BuildArea extends React.Component {
         this.state = {
             tree: [{
                 plugin: "Image",
-                name: "image",
-                id: 1
+                name: "image1",
+                id: 1,
+                active: false
             }, {
                 plugin: "Image",
-                name: "image",
-                id: 2
+                name: "image2",
+                id: 2,
+                active: false
             }, {
                 plugin: "Image",
-                name: "image",
-                id: 3
+                name: "image3",
+                id: 3,
+                active: false
             }]
         };
     }
@@ -60,6 +64,7 @@ class BuildArea extends React.Component {
                         {tree.map((item, index) => {
                             return (
                                 <Brick.Image
+                                    active={item.active}
                                     name={item.name}
                                     index={index}
                                     key={item.id}
@@ -73,10 +78,28 @@ class BuildArea extends React.Component {
     }
 
     moveBrick = (dragIndex, hoverIndex) => {
-        console.log(dragIndex, hoverIndex);
-        const tree = Object.assign({}, this.state.tree);
-        tree[1].name = "img";
-        console.log(tree, this.state.tree);
+        const { tree } = this.state;
+        let dragItem = tree[dragIndex];
+
+        if(dragIndex === undefined) {
+            dragIndex = tree.length;
+            dragItem = {
+                plugin: "Image",
+                name: "image" + (dragIndex + 1),
+                id: dragIndex + 1,
+                active: true
+            };
+        }else {
+            dragItem = tree[dragIndex];
+        }
+        const dragObj = update(this.state, {
+            tree: {
+                $splice: [[dragIndex, 1], [hoverIndex, 0, dragItem]]
+            }
+        });
+        this.setState(dragObj);
+        // tree[1].name = "todo";
+        console.log(tree[1], this.state.tree[1], dragObj);
     }
 }
 

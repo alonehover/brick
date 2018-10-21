@@ -1,6 +1,7 @@
 import React from "react";
 import { DragSource, DropTarget } from "react-dnd";
 import { findDOMNode } from "react-dom";
+import classNames from "classnames";
 
 import style from "./index.less";
 
@@ -68,7 +69,7 @@ const imageTarget = {
         // Generally it's better to avoid mutations,
         // but it's good here for the sake of performance
         // to avoid expensive index searches.
-        // monitor.getItem().index = hoverIndex;
+        monitor.getItem().index = hoverIndex;
     }
 };
 
@@ -81,12 +82,15 @@ const imageTarget = {
 }))
 class Image extends React.Component {
     render() {
-        const { isDragging, connectDragSource, connectDropTarget, name } = this.props;
+        const { isDragging, connectDragSource, connectDropTarget, name, active } = this.props;
+        const activeClass = classNames({
+            [style.image]: true,
+            [style.active]: isDragging || active
+        });
         return connectDragSource(
             connectDropTarget(
                 <div
-                    className={style.image}
-                    style={{ opacity: isDragging ? 0.4 : 1}}>
+                    className={activeClass}>
                     {name}
                 </div>
             )
