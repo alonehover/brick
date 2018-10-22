@@ -9,10 +9,18 @@ const cardSource = {
             name: props.name
         };
     },
-    endDrag(props, monitor) {
-        const item = monitor.getItem();
+    endDrag(props, monitor, component) {
+        // const item = monitor.getItem();
         const dropResult = monitor.getDropResult();
-        console.log(item, dropResult);
+        // console.log(item, dropResult);
+        console.log(props, monitor, component.state);
+        if(!dropResult) {
+            // 只有最终放置在构建槽里的组件才会新增渲染组件
+            console.log("清除新增的渲染组件");
+            return;
+        }
+
+        console.log("渲染组件添加成功");
     }
 };
 

@@ -5,6 +5,6 @@ export default [
         path: "/",
         exact: true,
         id: "首页",
-        component: Page.Home,
-    },
+        component: Page.Home
+    }
 ];

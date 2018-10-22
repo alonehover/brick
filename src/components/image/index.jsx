@@ -13,9 +13,9 @@ const imageSource = {
         };
     },
     endDrag(props, monitor) {
-        const item = monitor.getItem();
-        const dropResult = monitor.getDropResult();
-        console.log(item, dropResult);
+        // const item = monitor.getItem();
+        // const dropResult = monitor.getDropResult();
+        // console.log(item, dropResult);
     }
 };
 
@@ -62,7 +62,7 @@ const imageTarget = {
         }
 
         // Time to actually perform the action
-        console.log(dragIndex, hoverIndex);
+        // console.log(dragIndex, hoverIndex);
         props.moveBrick(dragIndex, hoverIndex);
 
         // Note: we're mutating the monitor item here!

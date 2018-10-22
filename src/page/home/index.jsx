@@ -32,7 +32,7 @@ class Home extends Component {
         return (
             <section id="editor">
                 <Layout>
-                    <Header>Header</Header>
+                    <Header>活动页编辑器</Header>
                     <Layout>
                         <Sider className={style.editorSider}>
                             <ToolMenu />

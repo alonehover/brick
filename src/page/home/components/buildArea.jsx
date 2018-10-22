@@ -1,19 +1,23 @@
 import * as React from "react";
-import {
-    DropTarget
-} from "react-dnd";
+import { DropTarget } from "react-dnd";
+import { inject, observer } from "mobx-react";
 import update from "immutability-helper";
+
 import Brick from "../../../components";
+import style from "./buildArea.less";
 
 const boxTarget = {
-    drop() {
+    drop(props, monitor, component) {
+        console.log(monitor.didDrop(), component.state);
         return { name: "Area" };
     }
+    // hover(props, monitor, component) {
+    //     console.log(monitor.isOver({ shallow: true }));
+    // }
 };
 
-import style from "./buildArea.less";
 @DropTarget(
-    "MenuItem",
+    "Image",
     boxTarget,
     (connect, monitor) => ({
         connectDropTarget: connect.dropTarget(),
@@ -21,33 +25,15 @@ import style from "./buildArea.less";
         canDrop: monitor.canDrop()
     }),
 )
+@inject("homeStore") @observer
 class BuildArea extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            tree: [{
-                plugin: "Image",
-                name: "image1",
-                id: 1,
-                active: false
-            }, {
-                plugin: "Image",
-                name: "image2",
-                id: 2,
-                active: false
-            }, {
-                plugin: "Image",
-                name: "image3",
-                id: 3,
-                active: false
-            }]
-        };
     }
 
     render() {
         const { canDrop, isOver, connectDropTarget } = this.props;
-        const { tree } = this.state;
+        const tree = this.props.homeStore.brickBuildList;
         const isActive = canDrop && isOver;
 
         let border = "1px solid #ccc";
@@ -78,7 +64,7 @@ class BuildArea extends React.Component {
     }
 
     moveBrick = (dragIndex, hoverIndex) => {
-        const { tree } = this.state;
+        const tree = this.props.homeStore.brickBuildList;
         let dragItem = tree[dragIndex];
 
         if(dragIndex === undefined) {
@@ -92,14 +78,10 @@ class BuildArea extends React.Component {
         }else {
             dragItem = tree[dragIndex];
         }
-        const dragObj = update(this.state, {
-            tree: {
-                $splice: [[dragIndex, 1], [hoverIndex, 0, dragItem]]
-            }
+        const dragObj = update(tree, {
+            $splice: [[dragIndex, 1], [hoverIndex, 0, dragItem]]
         });
-        this.setState(dragObj);
-        // tree[1].name = "todo";
-        console.log(tree[1], this.state.tree[1], dragObj);
+        this.props.homeStore.changeBrickBuildListSort(dragObj);
     }
 }
 
