@@ -3,30 +3,32 @@ import { observable, action } from "mobx";
 export default class HomeStore {
     @observable brickToolDragging = false;
     @observable brickBuildList = [{
-        plugin: "Image",
-        name: "image1",
+        plugin: "Empty",
+        name: "拖拽组件到这里",
         id: 1,
-        active: false
-    }, {
-        plugin: "Image",
-        name: "image2",
-        id: 2,
-        active: false
-    }, {
-        plugin: "Image",
-        name: "image3",
-        id: 3,
         active: false
     }];
 
     @action
-    changeBrickBuildListSort(data) {
-        this.brickBuildList = data;
+    changeBrickBuildList(data) {
+        this.brickBuildList.replace(data);
     }
 
+    // 清除拖拽未加入的组件
     @action
-    cancelLastBrick(data) {
-        console.log(this.brickBuildList);
-        // this.brickToolDragStatus = data;
+    handleLastBrick(type) {
+        switch(type) {
+        case "delete":
+            this.brickBuildList = this.brickBuildList.filter(item => {
+                return item.id !== this.brickBuildList.length;
+            });
+            break;
+        case "add":
+            this.brickBuildList = this.brickBuildList.map(item => {
+                item.active = false;
+                return item;
+            });
+            break;
+        }
     }
 }

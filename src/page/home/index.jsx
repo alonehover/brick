@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Layout } from "antd";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
+import { inject, observer } from "mobx-react";
 
 // import Board from "../../components/checkerboard";
 import ToolMenu from "./components/toolMenu";
@@ -11,6 +12,7 @@ import style from "./index.less";
 
 const { Header, Sider, Content } = Layout;
 
+@inject("homeStore") @observer
 @DragDropContext(HTML5Backend)
 class Home extends Component {
     constructor(props) {
@@ -19,6 +21,8 @@ class Home extends Component {
         this.state = {
             height: 0
         };
+
+        console.log(this.props);
     }
 
     componentDidMount() {
@@ -43,7 +47,7 @@ class Home extends Component {
                                     https://bilili.stite
                                 </div>
                             </div>
-                            <BuildArea />
+                            <BuildArea homeStore={this.props.homeStore} />
                         </Content>
                     </Layout>
                 </Layout>

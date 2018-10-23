@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DropTarget } from "react-dnd";
-import { inject, observer } from "mobx-react";
 import update from "immutability-helper";
+import { inject, observer } from "mobx-react";
 
 import Brick from "../../../components";
 import style from "./buildArea.less";
@@ -11,9 +11,6 @@ const boxTarget = {
         console.log(monitor.didDrop(), component.state);
         return { name: "Area" };
     }
-    // hover(props, monitor, component) {
-    //     console.log(monitor.isOver({ shallow: true }));
-    // }
 };
 
 @DropTarget(
@@ -25,15 +22,16 @@ const boxTarget = {
         canDrop: monitor.canDrop()
     }),
 )
-@inject("homeStore") @observer
+@observer
 class BuildArea extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     render() {
-        const { canDrop, isOver, connectDropTarget } = this.props;
-        const tree = this.props.homeStore.brickBuildList;
+        const { canDrop, isOver, connectDropTarget, homeStore } = this.props;
+        const tree = homeStore.brickBuildList || [];
         const isActive = canDrop && isOver;
 
         let border = "1px solid #ccc";
@@ -81,7 +79,7 @@ class BuildArea extends React.Component {
         const dragObj = update(tree, {
             $splice: [[dragIndex, 1], [hoverIndex, 0, dragItem]]
         });
-        this.props.homeStore.changeBrickBuildListSort(dragObj);
+        this.props.homeStore.changeBrickBuildList(dragObj);
     }
 }
 

@@ -2,9 +2,7 @@ import React from "react";
 import ToolMenuItem from "./toolMenuItem";
 
 import style from "./toolMenu.less";
-import { inject, observer } from "mobx-react";
 
-@inject("homeStore") @observer
 class ToolMenu extends React.Component {
     render() {
         return (
