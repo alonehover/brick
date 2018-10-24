@@ -2,12 +2,8 @@ import { observable, action } from "mobx";
 
 export default class HomeStore {
     @observable brickToolDragging = false;
-    @observable brickBuildList = [{
-        plugin: "Empty",
-        name: "拖拽组件到这里",
-        id: 1,
-        active: false
-    }];
+    @observable brickBuildList = [];
+    @observable editBrick = null;
 
     @action
     changeBrickBuildList(data) {
@@ -26,9 +22,15 @@ export default class HomeStore {
         case "add":
             this.brickBuildList = this.brickBuildList.map(item => {
                 item.active = false;
+                item.canDrop = true;
                 return item;
             });
             break;
         }
+    }
+
+    @action
+    setEditBrick(index) {
+        this.editBrick = index;
     }
 }

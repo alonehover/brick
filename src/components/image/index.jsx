@@ -21,7 +21,7 @@ const imageSource = {
 
 const imageTarget = {
     hover(props, monitor, component) {
-        if (!component) {
+        if (!component || !props.canDrop) {
             return null;
         }
 
@@ -90,11 +90,16 @@ class Image extends React.Component {
         return connectDragSource(
             connectDropTarget(
                 <div
-                    className={activeClass}>
+                    className={activeClass}
+                    onClick={this.handleClick}>
                     {name}
                 </div>
             )
         );
+    }
+
+    handleClick = () => {
+        console.log("click", this.props);
     }
 }
 

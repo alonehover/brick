@@ -22,7 +22,7 @@ class Home extends Component {
             height: 0
         };
 
-        console.log(this.props);
+        // console.log(this.props);
     }
 
     componentDidMount() {
@@ -49,6 +49,9 @@ class Home extends Component {
                             </div>
                             <BuildArea homeStore={this.props.homeStore} />
                         </Content>
+                        <Sider className={style.editorConfig}>
+                            <h1>设置</h1>
+                        </Sider>
                     </Layout>
                 </Layout>
             </section>

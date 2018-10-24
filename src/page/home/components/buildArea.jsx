@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DropTarget } from "react-dnd";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react";
 import update from "immutability-helper";
 
 import Brick from "../../../components";
@@ -8,7 +8,6 @@ import style from "./buildArea.less";
 
 const boxTarget = {
     drop(props, monitor, component) {
-        console.log(monitor.didDrop(), component.state);
         return { name: "Area" };
     },
     hover(props) {
@@ -17,7 +16,9 @@ const boxTarget = {
                 plugin: "Image",
                 name: "image1",
                 id: 1,
-                active: true
+                active: true,
+                canDrop: false,
+                edit: false
             }]);
         }
     }
@@ -57,8 +58,7 @@ class BuildArea extends React.Component {
                         {tree.map((item, index) => {
                             return (
                                 <Brick.Image
-                                    active={item.active}
-                                    name={item.name}
+                                    {...item}
                                     index={index}
                                     key={item.id}
                                     moveBrick={this.moveBrick}
