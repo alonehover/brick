@@ -4,6 +4,7 @@ import { findDOMNode } from "react-dom";
 import classNames from "classnames";
 
 import style from "./index.less";
+import { observer, inject } from "mobx-react";
 
 const imageSource = {
     beginDrag(props) {
@@ -11,11 +12,6 @@ const imageSource = {
             name: props.name,
             index: props.index
         };
-    },
-    endDrag(props, monitor) {
-        // const item = monitor.getItem();
-        // const dropResult = monitor.getDropResult();
-        // console.log(item, dropResult);
     }
 };
 
@@ -80,7 +76,14 @@ const imageTarget = {
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
 }))
+@inject("homeStore") @observer
 class Image extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log("props", props);
+        this.imageRef = null;
+    }
+
     render() {
         const { isDragging, connectDragSource, connectDropTarget, name, active } = this.props;
         const activeClass = classNames({
@@ -91,7 +94,9 @@ class Image extends React.Component {
             connectDropTarget(
                 <div
                     className={activeClass}
-                    onClick={this.handleClick}>
+                    onClick={this.handleClick}
+                    ref={el => (this.imageRef = el)}
+                    onMouseOver={this.handleHover}>
                     {name}
                 </div>
             )
@@ -100,6 +105,12 @@ class Image extends React.Component {
 
     handleClick = () => {
         console.log("click", this.props);
+    }
+
+    handleHover = () => {
+        const { homeStore } = this.props;
+        const { x, y } = this.imageRef.getBoundingClientRect();
+        homeStore.hoverBrick(this.props.id, {x, y});
     }
 }
 

@@ -18,8 +18,8 @@ const cardSource = {
             props.homeStore.handleLastBrick("delete");
             return;
         }
-
-        props.homeStore.handleLastBrick("add");
+        console.log(props);
+        props.homeStore.handleLastBrick();
         console.log("渲染组件添加成功");
     }
 };

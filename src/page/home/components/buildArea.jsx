@@ -40,8 +40,8 @@ class BuildArea extends React.Component {
     }
 
     render() {
-        const { canDrop, isOver, connectDropTarget } = this.props;
-        const tree = this.props.homeStore.brickBuildList;
+        const { canDrop, isOver, connectDropTarget, toolFixedOpsition, homeStore } = this.props;
+        const tree = homeStore.brickBuildList;
         const isActive = canDrop && isOver;
 
         let border = "1px solid #ccc";
@@ -54,7 +54,7 @@ class BuildArea extends React.Component {
         return (
             <div className={style.areaMain}>
                 {connectDropTarget && connectDropTarget(
-                    <div style={{border}} className={style.buildArea}>
+                    <div id="buildArea" style={{border}} className={style.buildArea}>
                         {tree.map((item, index) => {
                             return (
                                 <Brick.Image
@@ -66,6 +66,10 @@ class BuildArea extends React.Component {
                         })}
                     </div>
                 )}
+
+                <div className={style.toolFixed} style={toolFixedOpsition}>
+                    aaa
+                </div>
             </div>
         );
     }
