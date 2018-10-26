@@ -12,6 +12,18 @@ const imageSource = {
             name: props.name,
             index: props.index
         };
+    },
+    endDrag(props, monitor, component) {
+        const dropResult = monitor.getDropResult();
+        if(!dropResult) {
+            // 只有最终放置在构建槽里的组件才会新增渲染组件
+            console.log("未放置在构建槽，清除新增的渲染组件");
+            props.homeStore.handleLastBrick("delete");
+            return;
+        }
+        console.log(props);
+        props.homeStore.handleLastBrick();
+        console.log("渲染组件添加成功");
     }
 };
 
@@ -85,10 +97,10 @@ class Image extends React.Component {
     }
 
     render() {
-        const { isDragging, connectDragSource, connectDropTarget, name, active } = this.props;
+        const { isDragging, connectDragSource, connectDropTarget, name, dragging } = this.props;
         const activeClass = classNames({
             [style.image]: true,
-            [style.active]: isDragging || active
+            [style.active]: isDragging || dragging
         });
         return connectDragSource(
             connectDropTarget(
@@ -109,8 +121,7 @@ class Image extends React.Component {
 
     handleHover = () => {
         const { homeStore } = this.props;
-        const { x, y } = this.imageRef.getBoundingClientRect();
-        homeStore.hoverBrick(this.props.id, {x, y});
+        homeStore.hoverBrick(this.props.id, this.imageRef.getBoundingClientRect());
     }
 }
 

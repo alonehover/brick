@@ -1,6 +1,8 @@
 import * as React from "react";
+import { Icon } from "antd";
 import { DropTarget } from "react-dnd";
 import { observer } from "mobx-react";
+import { toJS } from "mobx";
 import update from "immutability-helper";
 
 import Brick from "../../../components";
@@ -15,8 +17,8 @@ const boxTarget = {
             props.homeStore.changeBrickBuildList([{
                 plugin: "Image",
                 name: "image1",
-                id: 1,
-                active: true,
+                id: new Date().valueOf(),
+                dragging: true,
                 canDrop: false,
                 edit: false
             }]);
@@ -40,7 +42,7 @@ class BuildArea extends React.Component {
     }
 
     render() {
-        const { canDrop, isOver, connectDropTarget, toolFixedOpsition, homeStore } = this.props;
+        const { canDrop, isOver, connectDropTarget, homeStore } = this.props;
         const tree = homeStore.brickBuildList;
         const isActive = canDrop && isOver;
 
@@ -67,8 +69,12 @@ class BuildArea extends React.Component {
                     </div>
                 )}
 
-                <div className={style.toolFixed} style={toolFixedOpsition}>
-                    aaa
+                <div className={style.toolFixed} style={toJS(homeStore.toolFixedOpsition.style)}>
+                    <ul>
+                        <li className={style.removeBtn} onClick={this.removeBrick}>
+                            <Icon type="delete" theme="filled" />
+                        </li>
+                    </ul>
                 </div>
             </div>
         );
@@ -83,8 +89,8 @@ class BuildArea extends React.Component {
             dragItem = {
                 plugin: "Image",
                 name: "image" + (dragIndex + 1),
-                id: dragIndex + 1,
-                active: true
+                id: new Date().valueOf(),
+                dragging: true
             };
         }else {
             dragItem = tree[dragIndex];
@@ -93,6 +99,10 @@ class BuildArea extends React.Component {
             $splice: [[dragIndex, 1], [hoverIndex, 0, dragItem]]
         });
         this.props.homeStore.changeBrickBuildList(dragObj);
+    }
+
+    removeBrick = () => {
+        console.log(this.props.homeStore.toolFixedOpsition.brickId);
     }
 }
 
