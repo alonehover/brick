@@ -7,25 +7,36 @@ import style from "./toolMenu.less";
 const cardSource = {
     beginDrag(props) {
         return {
-            name: props.name
+            name: props.name,
+            plugin: props.plugin
         };
     },
     endDrag(props, monitor, component) {
         const dropResult = monitor.getDropResult();
         if(!dropResult) {
             // 只有最终放置在构建槽里的组件才会新增渲染组件
-            console.log("未放置在构建槽，清除新增的渲染组件");
+            console.log(props.name + "未放置在构建槽，清除新增的渲染组件");
             props.homeStore.handleLastBrick("delete");
             return;
         }
-        console.log(props);
+
+        if(!props.homeStore.brickBuildList.length) {
+            props.homeStore.changeBrickBuildList([{
+                plugin: props.plugin,
+                name: props.name,
+                id: new Date().valueOf(),
+                dragging: true,
+                canDrop: false,
+                edit: false
+            }]);
+        }
         props.homeStore.handleLastBrick();
-        console.log("渲染组件添加成功");
+        console.log(props.name + "渲染组件添加成功");
     }
 };
 
 @inject("homeStore") @observer
-@DragSource("Image", cardSource, (connect, monitor) => ({
+@DragSource("ToolItem", cardSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
 }))

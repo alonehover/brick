@@ -1,5 +1,5 @@
-import Image from "./image";
+import Block from "./block";
 
 export default {
-    Image
+    Block
 };

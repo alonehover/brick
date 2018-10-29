@@ -44,7 +44,7 @@ class Home extends Component {
                         <Content style={{ minHeight: height }} className={style.Content}>
                             <div className={style.areaHead}>
                                 <div className={style.urlContent}>
-                                    https://bilili.stite
+                                    https://site.com
                                 </div>
                             </div>
                             <BuildArea homeStore={this.props.homeStore} />

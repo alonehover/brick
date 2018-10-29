@@ -9,14 +9,14 @@ class ToolMenu extends React.Component {
             <section className={style.toolMenu}>
                 <h1>组件列表</h1>
                 <div>
-                    <ToolMenuItem name="Image" />
-                    <ToolMenuItem name="Banner" />
-                    <ToolMenuItem name="Multi banner" />
-                    <ToolMenuItem name="Product 【M】" />
-                    <ToolMenuItem name="Product 【L】" />
-                    <ToolMenuItem name="Tab" />
-                    <ToolMenuItem name="Navigation" />
-                    <ToolMenuItem name="Text" />
+                    <ToolMenuItem name="Image" plugin="Image" />
+                    <ToolMenuItem name="Banner" plugin="Image" />
+                    <ToolMenuItem name="Multi banner" plugin="Image_Mul" />
+                    <ToolMenuItem name="Product 【M】" plugin="Product_M" />
+                    <ToolMenuItem name="Product 【L】" plugin="Product_L" />
+                    <ToolMenuItem name="Tab" plugin="Tab" />
+                    <ToolMenuItem name="Navigation" plugin="Navigation" />
+                    <ToolMenuItem name="Text" plugin="Text" />
                 </div>
             </section>
         );

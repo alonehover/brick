@@ -56,7 +56,19 @@ export default class HomeStore {
     }
 
     @action
-    removeBrick(id) {
-        console.log("remove", id);
+    removeBrick() {
+        if(this.toolFixedOpsition.brickId) {
+            this.brickBuildList = this.brickBuildList.filter(item => {
+                return item.id !== this.toolFixedOpsition.brickId;
+            });
+            this.toolFixedOpsition = {
+                brickId: "",
+                style: {
+                    ...this.toolFixedOpsition.style,
+                    top: "-100px",
+                    left: "-100px"
+                }
+            };
+        }
     }
 }

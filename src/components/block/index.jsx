@@ -21,7 +21,6 @@ const imageSource = {
             props.homeStore.handleLastBrick("delete");
             return;
         }
-        console.log(props);
         props.homeStore.handleLastBrick();
         console.log("渲染组件添加成功");
     }
@@ -68,10 +67,8 @@ const imageTarget = {
         if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
             return;
         }
-
         // Time to actually perform the action
-        // console.log(dragIndex, hoverIndex);
-        props.moveBrick(dragIndex, hoverIndex);
+        props.moveBrick(dragIndex, hoverIndex, monitor.getItem());
 
         // Note: we're mutating the monitor item here!
         // Generally it's better to avoid mutations,
@@ -81,19 +78,18 @@ const imageTarget = {
     }
 };
 
-@DropTarget("Image", imageTarget, connect => ({
+@inject("homeStore") @observer
+@DropTarget(["Block", "ToolItem"], imageTarget, connect => ({
     connectDropTarget: connect.dropTarget()
 }))
-@DragSource("Image", imageSource, (connect, monitor) => ({
+@DragSource("Block", imageSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
 }))
-@inject("homeStore") @observer
-class Image extends React.Component {
+class Block extends React.Component {
     constructor(props) {
         super(props);
-        console.log("props", props);
-        this.imageRef = null;
+        this.blockRef = null;
     }
 
     render() {
@@ -107,7 +103,7 @@ class Image extends React.Component {
                 <div
                     className={activeClass}
                     onClick={this.handleClick}
-                    ref={el => (this.imageRef = el)}
+                    ref={el => (this.blockRef = el)}
                     onMouseOver={this.handleHover}>
                     {name}
                 </div>
@@ -121,8 +117,8 @@ class Image extends React.Component {
 
     handleHover = () => {
         const { homeStore } = this.props;
-        homeStore.hoverBrick(this.props.id, this.imageRef.getBoundingClientRect());
+        homeStore.hoverBrick(this.props.id, this.blockRef.getBoundingClientRect());
     }
 }
 
-export default Image;
+export default Block;

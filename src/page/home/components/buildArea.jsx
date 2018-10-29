@@ -11,23 +11,11 @@ import style from "./buildArea.less";
 const boxTarget = {
     drop(props, monitor, component) {
         return { name: "Area" };
-    },
-    hover(props) {
-        if(!props.homeStore.brickBuildList.length) {
-            props.homeStore.changeBrickBuildList([{
-                plugin: "Image",
-                name: "image1",
-                id: new Date().valueOf(),
-                dragging: true,
-                canDrop: false,
-                edit: false
-            }]);
-        }
     }
 };
 
 @DropTarget(
-    "Image",
+    ["Block", "ToolItem"],
     boxTarget,
     (connect, monitor) => ({
         connectDropTarget: connect.dropTarget(),
@@ -59,7 +47,7 @@ class BuildArea extends React.Component {
                     <div id="buildArea" style={{border}} className={style.buildArea}>
                         {tree.map((item, index) => {
                             return (
-                                <Brick.Image
+                                <Brick.Block
                                     {...item}
                                     index={index}
                                     key={item.id}
@@ -80,15 +68,15 @@ class BuildArea extends React.Component {
         );
     }
 
-    moveBrick = (dragIndex, hoverIndex) => {
+    moveBrick = (dragIndex, hoverIndex, props) => {
         const tree = this.props.homeStore.brickBuildList;
         let dragItem = tree[dragIndex];
 
         if(dragIndex === undefined) {
             dragIndex = tree.length;
             dragItem = {
-                plugin: "Image",
-                name: "image" + (dragIndex + 1),
+                plugin: props.plugin,
+                name: props.name,
                 id: new Date().valueOf(),
                 dragging: true
             };
@@ -102,7 +90,7 @@ class BuildArea extends React.Component {
     }
 
     removeBrick = () => {
-        console.log(this.props.homeStore.toolFixedOpsition.brickId);
+        this.props.homeStore.removeBrick();
     }
 }
 
