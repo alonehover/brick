@@ -20,12 +20,13 @@ const cardSource = {
             return;
         }
 
+        // 没有组件时新增一个
         if(!props.homeStore.brickBuildList.length) {
             props.homeStore.changeBrickBuildList([{
                 plugin: props.plugin,
                 name: props.name,
                 id: new Date().valueOf(),
-                dragging: true,
+                newBrick: true,
                 canDrop: false,
                 edit: false
             }]);

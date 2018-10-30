@@ -94,7 +94,6 @@ class Block extends React.Component {
 
     render() {
         const { isDragging, connectDragSource, connectDropTarget, name, newBrick, edit, id } = this.props;
-        console.log("inist", this.props, id);
         const activeClass = classNames({
             [style.block]: true,
             [style.draging]: isDragging || newBrick,
