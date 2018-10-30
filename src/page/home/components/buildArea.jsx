@@ -51,6 +51,7 @@ class BuildArea extends React.Component {
                                     {...item}
                                     index={index}
                                     key={item.id}
+                                    homeStore={homeStore}
                                     moveBrick={this.moveBrick}
                                 />);
                         })}
@@ -78,7 +79,7 @@ class BuildArea extends React.Component {
                 plugin: props.plugin,
                 name: props.name,
                 id: new Date().valueOf(),
-                dragging: true
+                newBrick: true
             };
         }else {
             dragItem = tree[dragIndex];

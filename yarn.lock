@@ -4379,10 +4379,10 @@ mobx-react-devtools@^6.0.3:
   resolved "https://registry.yarnpkg.com/mobx-react-devtools/-/mobx-react-devtools-6.0.3.tgz#4d536c8cdd77d9f4b81f5e8415d7bedccc6a2a99"
   integrity sha512-PY+lG6XeWaC0DFnDaVC7ImrHJQu7XVXNy4z4fmqHzWc3p+fJisKmaZNwgToO2vJGBghz98Mx2yXUBLw1Ba2mPQ==
 
-mobx-react@^5.3.4:
-  version "5.3.4"
-  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-5.3.4.tgz#9e48968c42b4a8f1c64532ea94bab1c35f4da136"
-  integrity sha512-IUn7nOoPqQgutM/4H7aZYAeFwtCMqRqvMKJ9wpIqQV2XwX97BiU7VIDa/09Y/i+LrOQjkl4KJRId5MNiFYzm+A==
+mobx-react@^5.3.6:
+  version "5.3.6"
+  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-5.3.6.tgz#0bead0173aed7d12ace4981b53c28db4d61de9ef"
+  integrity sha512-u0ehjkyMllnt+SQ/G5BACxwi4VkJOqDVauA7cL8UvDi4oLO1ID9Z5c/nudTdIAmtsDDhJSxW85mrgsA2Iv/56Q==
   dependencies:
     hoist-non-react-statics "^3.0.0"
     react-lifecycles-compat "^3.0.2"

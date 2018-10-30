@@ -6,7 +6,7 @@ import classNames from "classnames";
 import style from "./index.less";
 import { observer, inject } from "mobx-react";
 
-const imageSource = {
+const blockSource = {
     beginDrag(props) {
         return {
             name: props.name,
@@ -26,7 +26,7 @@ const imageSource = {
     }
 };
 
-const imageTarget = {
+const blockTarget = {
     hover(props, monitor, component) {
         if (!component || !props.canDrop) {
             return null;
@@ -78,11 +78,11 @@ const imageTarget = {
     }
 };
 
-@inject("homeStore") @observer
-@DropTarget(["Block", "ToolItem"], imageTarget, connect => ({
+@observer
+@DropTarget(["Block", "ToolItem"], blockTarget, connect => ({
     connectDropTarget: connect.dropTarget()
 }))
-@DragSource("Block", imageSource, (connect, monitor) => ({
+@DragSource("Block", blockSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
 }))
@@ -93,18 +93,20 @@ class Block extends React.Component {
     }
 
     render() {
-        const { isDragging, connectDragSource, connectDropTarget, name, dragging } = this.props;
+        const { isDragging, connectDragSource, connectDropTarget, name, newBrick, edit, id } = this.props;
+        console.log("inist", this.props, id);
         const activeClass = classNames({
-            [style.image]: true,
-            [style.active]: isDragging || dragging
+            [style.block]: true,
+            [style.draging]: isDragging || newBrick,
+            [style.active]: isDragging,
+            [style.edit]: edit
         });
         return connectDragSource(
             connectDropTarget(
                 <div
                     className={activeClass}
                     onClick={this.handleClick}
-                    ref={el => (this.blockRef = el)}
-                    onMouseOver={this.handleHover}>
+                    ref={el => (this.blockRef = el)}>
                     {name}
                 </div>
             )
@@ -113,11 +115,8 @@ class Block extends React.Component {
 
     handleClick = () => {
         console.log("click", this.props);
-    }
-
-    handleHover = () => {
-        const { homeStore } = this.props;
-        homeStore.hoverBrick(this.props.id, this.blockRef.getBoundingClientRect());
+        const { homeStore, id } = this.props;
+        homeStore.selectBrick(id, this.blockRef.getBoundingClientRect());
     }
 }
 

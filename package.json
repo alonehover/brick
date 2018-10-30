@@ -14,7 +14,7 @@
     "classnames": "^2.2.6",
     "immutability-helper": "^2.8.1",
     "mobx": "^5.5.1",
-    "mobx-react": "^5.3.4",
+    "mobx-react": "^5.3.6",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dnd": "^5.0.0",

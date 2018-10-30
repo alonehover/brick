@@ -39,6 +39,7 @@ class Home extends Component {
                     <Header>活动页编辑器</Header>
                     <Layout>
                         <Sider className={style.editorSider}>
+                            {/* 组件集 */}
                             <ToolMenu />
                         </Sider>
                         <Content style={{ minHeight: height }} className={style.Content}>
@@ -47,10 +48,20 @@ class Home extends Component {
                                     https://site.com
                                 </div>
                             </div>
+                            {/* 拖拽区 */}
                             <BuildArea homeStore={this.props.homeStore} />
                         </Content>
                         <Sider className={style.editorConfig}>
                             <h1>设置</h1>
+                            <ul>
+                                <li>导航id</li>
+                                <li>背景(图片或者颜色)</li>
+                                <li>字体大小</li>
+                                <li>字体颜色</li>
+                                <li>行高</li>
+                                <li>外边距</li>
+                                <li>内边距</li>
+                            </ul>
                         </Sider>
                     </Layout>
                 </Layout>

@@ -1,5 +1,5 @@
-.image {
-    height: 100px;
+.block {
+    min-height: 100px;
     line-height: 100px;
     background: #FFF;
     text-align: center;
@@ -7,12 +7,19 @@
     cursor: move;
     opacity: 1;
 
-    &.active {
-        // border: 1px red dashed;
+    &.draging {
         opacity: 0.4;
     }
 
     &:hover {
+        border: 1px #aaa dashed;
+    }
+
+    &.active {
         border: 1px red dashed;
+    }
+
+    &.edit {
+        border: 1px red solid;
     }
 }

@@ -4,6 +4,7 @@ export default class HomeStore {
     @observable brickToolDragging = false;
     @observable brickBuildList = [];
     @observable editBrick = null;
+    // 悬浮的组件工具条
     @observable toolFixedOpsition = {
         style: {
             position: "fixed",
@@ -23,28 +24,29 @@ export default class HomeStore {
     handleLastBrick(id) {
         if(id) {
             this.brickBuildList = this.brickBuildList.filter(item => {
-                return !item.dragging;
+                return !item.newBrick;
             });
             return false;
         }
 
         this.brickBuildList = this.brickBuildList.map(item => {
-            item.dragging = false;
+            item.newBrick = false;
             item.canDrop = true;
             return item;
         });
     }
 
     @action
-    hoverBrick(id, pos) {
+    selectBrick(id, pos) {
         this.editBrick = id;
         this.brickBuildList = this.brickBuildList.map(item => {
             if(item.id === id) {
                 item.edit = true;
+            }else {
+                item.edit = false;
             }
             return item;
         });
-
         this.toolFixedOpsition = {
             brickId: id,
             style: {
