@@ -8,7 +8,8 @@ const cardSource = {
     beginDrag(props) {
         return {
             name: props.name,
-            plugin: props.plugin
+            plugin: props.plugin,
+            type: "toolMenuItem"
         };
     },
     endDrag(props, monitor, component) {
@@ -19,18 +20,18 @@ const cardSource = {
             props.homeStore.handleLastBrick("delete");
             return;
         }
-
-        // 没有组件时新增一个
-        if(!props.homeStore.brickBuildList.length) {
-            props.homeStore.changeBrickBuildList([{
+        let id =  new Date().valueOf(),
+            newBrick = {
+                id,
                 plugin: props.plugin,
                 name: props.name,
-                id: new Date().valueOf(),
                 newBrick: true,
                 canDrop: false,
                 edit: false
-            }]);
-        }
+            };
+        console.log(newBrick, "newBrick");
+        props.homeStore.initBrickStyle(id, props.plugin);
+        props.homeStore.changeBrickBuildList(newBrick);
         props.homeStore.handleLastBrick();
         console.log(props.name + "渲染组件添加成功");
     }

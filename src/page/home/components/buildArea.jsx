@@ -35,6 +35,7 @@ class BuildArea extends React.Component {
         const isActive = canDrop && isOver;
 
         let border = "1px solid #ccc";
+        console.log(tree, "tree");
         if (isActive) {
             border = "1px solid lightgreen";
         } else if (canDrop) {
@@ -87,7 +88,8 @@ class BuildArea extends React.Component {
         const dragObj = update(tree, {
             $splice: [[dragIndex, 1], [hoverIndex, 0, dragItem]]
         });
-        this.props.homeStore.changeBrickBuildList(dragObj);
+        console.log("in move brick");
+        this.props.homeStore.replaceBrickBuildList(dragObj);
     }
 
     removeBrick = () => {

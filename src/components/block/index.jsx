@@ -1,16 +1,19 @@
 import React from "react";
-import { DragSource, DropTarget } from "react-dnd";
+import { DropTarget, DragSource } from "react-dnd";
 import { findDOMNode } from "react-dom";
 import classNames from "classnames";
+import Brick from "../index";
 
 import style from "./index.less";
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 
 const blockSource = {
     beginDrag(props) {
+        console.log("block begin drag");
         return {
             name: props.name,
-            index: props.index
+            index: props.index,
+            type: "block"
         };
     },
     endDrag(props, monitor, component) {
@@ -28,13 +31,11 @@ const blockSource = {
 
 const blockTarget = {
     hover(props, monitor, component) {
-        if (!component || !props.canDrop) {
+        if (!component || !props.canDrop || monitor.getItem().type !== "block") {
             return null;
         }
-
         const dragIndex = monitor.getItem().index;
         const hoverIndex = props.index;
-
         // Don't replace items with themselves
         if (dragIndex === hoverIndex) {
             return;
@@ -57,7 +58,6 @@ const blockTarget = {
         // Only perform the move when the mouse has crossed half of the items height
         // When dragging downwards, only move when the cursor is below 50%
         // When dragging upwards, only move when the cursor is above 50%
-
         // Dragging downwards
         if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
             return;
@@ -67,6 +67,7 @@ const blockTarget = {
         if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
             return;
         }
+        console.log(dragIndex, hoverIndex, "move params");
         // Time to actually perform the action
         props.moveBrick(dragIndex, hoverIndex, monitor.getItem());
 
@@ -92,8 +93,14 @@ class Block extends React.Component {
         this.blockRef = null;
     }
 
+    switchBlockComponents = pluginName => {
+        let BlockComponent = Brick[pluginName];
+        return BlockComponent;
+    }
+
     render() {
-        const { isDragging, connectDragSource, connectDropTarget, name, newBrick, edit, id } = this.props;
+        const { isDragging, connectDragSource, connectDropTarget, newBrick, edit, id, plugin, homeStore } = this.props;
+        let BlockComponents = this.switchBlockComponents(plugin);
         const activeClass = classNames({
             [style.block]: true,
             [style.draging]: isDragging || newBrick,
@@ -106,7 +113,8 @@ class Block extends React.Component {
                     className={activeClass}
                     onClick={this.handleClick}
                     ref={el => (this.blockRef = el)}>
-                    {name}
+                    <BlockComponents id={id} homeStore={homeStore} />
+                    {/* {name} */}
                 </div>
             )
         );
@@ -114,8 +122,8 @@ class Block extends React.Component {
 
     handleClick = () => {
         console.log("click", this.props);
-        const { homeStore, id } = this.props;
-        homeStore.selectBrick(id, this.blockRef.getBoundingClientRect());
+        const { homeStore, id, plugin, name } = this.props;
+        homeStore.selectBrick({id, plugin, name}, this.blockRef.getBoundingClientRect());
     }
 }
 
