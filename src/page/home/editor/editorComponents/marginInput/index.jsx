@@ -18,20 +18,36 @@ class MarginInput extends React.Component {
         return(
             <Input.Group style={{ marginBottom: 16 }}>
                 <h3>外边距</h3>
-                <Row gutter={16} style={{ marginBottom: 16 }}>
+                <Row gutter={16} style={{ marginBottom: 8 }}>
                     <Col span={12}>
-                        <Input addonBefore="上" value={parseFloat(style.marginTop) || 0} addonAfter="px" onChange={e => this.styleNumEnter(e.target.value, "marginTop", "px")} />
+                        <Input size={"small"}
+                            addonBefore="上"
+                            addonAfter="px"
+                            value={style.marginTop ? (parseFloat(style.marginTop) || 0) : 0}
+                            onChange={e => this.styleNumEnter(e.target.value, "marginTop", "px")} />
                     </Col>
                     <Col span={12}>
-                        <Input addonBefore="右" value={parseFloat(style.marginRight) || 0} addonAfter="px" onChange={e => this.styleNumEnter(e.target.value, "marginRight", "px")} />
+                        <Input size={"small"}
+                            addonBefore="右"
+                            addonAfter="px"
+                            value={style.marginRight ? (parseFloat(style.marginRight) || 0) : 0}
+                            onChange={e => this.styleNumEnter(e.target.value, "marginRight", "px")} />
                     </Col>
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <Input addonBefore="下" value={parseFloat(style.marginBottom) || 0} addonAfter="px" onChange={e => this.styleNumEnter(e.target.value, "marginBottom", "px")} />
+                        <Input size={"small"}
+                            addonBefore="下"
+                            addonAfter="px"
+                            value={style.marginBottom ? (parseFloat(style.marginBottom) || 0) : 0}
+                            onChange={e => this.styleNumEnter(e.target.value, "marginBottom", "px")} />
                     </Col>
                     <Col span={12}>
-                        <Input addonBefore="左" value={parseFloat(style.marginLeft) || 0} addonAfter="px" onChange={e => this.styleNumEnter(e.target.value, "marginLeft", "px")} />
+                        <Input size={"small"}
+                            addonBefore="左"
+                            addonAfter="px"
+                            value={style.marginLeft ? (parseFloat(style.marginLeft) || 0) : 0}
+                            onChange={e => this.styleNumEnter(e.target.value, "marginLeft", "px")} />
                     </Col>
                 </Row>
             </Input.Group>

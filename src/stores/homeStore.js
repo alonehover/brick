@@ -84,7 +84,7 @@ export default class HomeStore {
     @action
     addNumStyle(value, key, unit) {
         let editBrick = this.editBrick;
-        this.brickListStyle[editBrick.id].style[key] = value ? `${value}${unit}` : `0${unit}`;
+        value ? this.brickListStyle[editBrick.id].style[key] = `${value}${unit}` : delete this.brickListStyle[editBrick.id].style[key];
     }
 
     // String类型
@@ -128,7 +128,7 @@ export default class HomeStore {
                 src: "",
                 href: "",
                 style: {
-                    height: "140px",
+                    height: "auto",
                     width: "100%",
                     paddingTop: "0",
                     paddingRight: "0",
@@ -144,10 +144,39 @@ export default class HomeStore {
             break;
         case "Banner":
             brickListStyle[id] = {
-                srcs: ["http://cdn.tff.bz/f1/86/b4/181110-ysAPP-1080809.jpg?imageView2/1/w/1125/h/843/q/90/format/jpg"],
+                imgs: [{
+                    title: "Banner Ttitle",
+                    src: "http://promotion.administration.qa1.tff.com/static_html/common/img/lazy.png",
+                    href: "#",
+                    appRouter: "/app/home",
+                    reactKey: `react_${new Date().valueOf()}`
+                }],
                 style: {
                 }
             };
+            break;
+        case "MultiBanner":
+            brickListStyle[id] = {
+                imgs: [{
+                    title: "Banner Ttitle",
+                    src: "http://promotion.administration.qa1.tff.com/static_html/common/img/lazy.png",
+                    href: "#",
+                    appRouter: "/app/home",
+                    reactKey: `react_${new Date().valueOf()}1`
+                }, {
+                    title: "Banner Ttitle",
+                    src: "http://promotion.administration.qa1.tff.com/static_html/common/img/lazy.png",
+                    href: "#",
+                    appRouter: "/app/home",
+                    reactKey: `react_${new Date().valueOf()}2`
+                }],
+                style: {
+                    height: "auto",
+                    width: "100%",
+                    backgroundSize: "cover"
+                }
+            };
+            break;
         }
     }
 }

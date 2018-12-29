@@ -20,10 +20,18 @@ class BlockInput extends React.Component {
                 <h3>{title}</h3>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <Input addonBefore="宽度" value={style.width ? (parseFloat(style.width) || 0) : 0} addonAfter="%" onChange={e => this.styleNumEnter(e.target.value, "width", "%")} />
+                        <Input size={"small"}
+                            addonBefore="宽度"
+                            addonAfter="%"
+                            onChange={e => this.styleNumEnter(e.target.value, "width", "%")}
+                            value={style.width !== "auto" ? (parseFloat(style.width) || 0) : 0} />
                     </Col>
                     <Col span={12}>
-                        <Input addonBefore="高度" value={style.height ? (parseFloat(style.height) || 0) : 0} addonAfter="px" onChange={e => this.styleNumEnter(e.target.value, "height", "px")} />
+                        <Input size={"small"}
+                            addonBefore="高度"
+                            addonAfter="px"
+                            value={style.height !== "auto" ? (parseFloat(style.height) || 0) : 0}
+                            onChange={e => this.styleNumEnter(e.target.value, "height", "px")} />
                     </Col>
                 </Row>
             </Input.Group>

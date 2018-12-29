@@ -1,13 +1,12 @@
 import * as React from "react";
 import { Button } from "antd";
 
-import BannerConfStyle from "./bannerConf.less";
 import { inject, observer } from "mobx-react";
 import EditorComponents from "../editorComponents";
 
 @inject("homeStore")
 @observer
-class BannerConf extends React.Component {
+class MultiBannerConf extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -25,7 +24,6 @@ class BannerConf extends React.Component {
     }
 
     srcValueChange = (value, key = "srcs", index) => {
-        // console.log(value, key = "src", index);
         let {homeStore} = this.props;
         homeStore.changeArrayParams(value, key, index);
     }
@@ -47,14 +45,15 @@ class BannerConf extends React.Component {
         return(
             <div style={{position: "relative"}}>
                 <h1>banner设置</h1>
-                <EditorComponents.BlockInput title="Banner" style={style} />
+                <EditorComponents.BlockInput title="Multi Banner" style={style} />
+                <EditorComponents.PaddingInput style={style} />
+                <EditorComponents.Background style={style} />
                 {/* <EditorComponents.MarginInput style={style} />
                 <EditorComponents.PaddingInput style={style} /> */}
-                <EditorComponents.Imgs />
+                <EditorComponents.Imgs style={style} />
                 <Button
                     block
                     type="primary"
-                    className={BannerConfStyle.addImage}
                     onClick={() => this.handleAddImg()} >
                     Add
                 </Button>
@@ -63,4 +62,4 @@ class BannerConf extends React.Component {
     }
 }
 
-export default BannerConf;
+export default MultiBannerConf;

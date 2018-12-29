@@ -1,13 +1,13 @@
-import BackgroundColor from "./backgroundColor";
+import Background from "./background";
 import BlockInput from "./blockInput";
 import MarginInput from "./marginInput";
-import Paddingnput from "./paddingInput";
+import PaddingInput from "./paddingInput";
 import Imgs from "./imgs";
 
 export default {
-    BackgroundColor,
+    Background,
     BlockInput,
     MarginInput,
-    Paddingnput,
+    PaddingInput,
     Imgs
 };

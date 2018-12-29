@@ -59,7 +59,7 @@ class Banner extends React.Component {
     touchEnd = event => {
         let {clickDown} = this.state,
             { homeStore, id } = this.props,
-            pageNum = homeStore.brickListStyle[id].srcs.length;
+            pageNum = homeStore.brickListStyle[id].imgs.length;
         if(clickDown) {
             let {startX, currentIndex} = this.state,
                 endX = event.pageX,
@@ -99,10 +99,10 @@ class Banner extends React.Component {
 
     render() {
         let { homeStore, id } = this.props;
-        let { srcs, style } = homeStore.brickListStyle[id];
+        let { imgs, style } = homeStore.brickListStyle[id];
         return(
             <ul className={BannerStyle.banner}
-                style={{transform: "translate3d(0px, 0px, 0px)", width: srcs.length * 100 + "%", ...style}}
+                style={{transform: "translate3d(0px, 0px, 0px)", width: imgs.length * 100 + "%", ...style}}
                 onMouseDown={e => this.touchStart(e)}
                 onMouseMove={e => this.touchMove(e)}
                 onMouseUp={e => this.touchEnd(e)}
@@ -110,9 +110,9 @@ class Banner extends React.Component {
                 onTransitionEnd={() => this.transitionEnd()}
                 ref="Banner" >
                 {
-                    srcs.map((src, index) => {
-                        return (<li key={id + "_" + index} style={{width: 100 / srcs.length + "%"}}>
-                            <img src={src} />
+                    imgs.map((img, index) => {
+                        return (<li key={id + "_" + index} style={{width: 100 / imgs.length + "%"}}>
+                            <img src={img.src} />
                         </li>);
                     })
                 }

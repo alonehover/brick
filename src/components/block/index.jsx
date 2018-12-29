@@ -67,7 +67,6 @@ const blockTarget = {
         if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
             return;
         }
-        console.log(dragIndex, hoverIndex, "move params");
         // Time to actually perform the action
         props.moveBrick(dragIndex, hoverIndex, monitor.getItem());
 

@@ -11,13 +11,13 @@ const tools = [{
     plugin: "Banner"
 }, {
     name: "Multi banner",
-    plugin: "Image_Mul"
+    plugin: "MultiBanner"
 }, {
     name: "Product 【M】",
-    plugin: "Product_M"
+    plugin: "ProductM"
 }, {
     name: "Product 【L】",
-    plugin: "Product_L"
+    plugin: "ProductL"
 }, {
     name: "Tab",
     plugin: "Tab"

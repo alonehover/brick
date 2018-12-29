@@ -35,7 +35,6 @@ class BuildArea extends React.Component {
         const isActive = canDrop && isOver;
 
         let border = "1px solid #ccc";
-        console.log(tree, "tree");
         if (isActive) {
             border = "1px solid lightgreen";
         } else if (canDrop) {

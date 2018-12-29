@@ -31,8 +31,8 @@ class ImageConf extends React.Component {
                 </div>
                 <EditorComponents.BlockInput style={style} title={editBrick.name} />
                 <EditorComponents.MarginInput style={style} />
-                <EditorComponents.Paddingnput style={style} />
-                <EditorComponents.BackgroundColor style={style} />
+                <EditorComponents.PaddingInput style={style} />
+                <EditorComponents.Background style={style} />
             </div>
         );
     }

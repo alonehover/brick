@@ -1,0 +1,23 @@
+.multiBanner {
+    ul {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: center;
+        padding: 0 3%;
+    }
+    li {
+        flex: 1;
+        margin-left: 6px;
+        &:first-child {
+            margin-left: 0;
+        }
+        a {
+            display: block;
+        }
+        img {
+            max-width: 100%;
+        }
+    }
+}

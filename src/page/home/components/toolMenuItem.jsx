@@ -29,7 +29,6 @@ const cardSource = {
                 canDrop: false,
                 edit: false
             };
-        console.log(newBrick, "newBrick");
         props.homeStore.initBrickStyle(id, props.plugin);
         props.homeStore.changeBrickBuildList(newBrick);
         props.homeStore.handleLastBrick();
