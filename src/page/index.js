@@ -1,5 +1,5 @@
-import Home from "./home";
+import Edit from "./edit";
 
 export default {
-    Home
+    Edit
 };

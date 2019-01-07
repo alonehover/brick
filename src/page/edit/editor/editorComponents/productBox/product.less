@@ -1,0 +1,76 @@
+.dragTag {
+    position: absolute;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    cursor: move;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAPlJREFUWAljYBgFAxwCzCTYzwRUawnEmkD8HIh/AzEy4AJyHIFYHIifAvF/ICYIWAiqQCiIAjK9oFx7IF2NkAKzQHxFqBiIXgpl46VAviIW6CEpBFnAi8QHsWGWg4T1keTwMklxwCUkk+4D2Z+R+CA2SAwGkNXCxCimQY61AmI3IAbFNzoAibkDMUgNKR5DN2eE8YdtNlQCRuQSYiKTlMRCSjZEVovXHaQ4ADlrDdpsCMqio9kQb5yjS45mQ1JyAXLWIlQbIqtFD3UUPikOGM2GKEE3bDjUzoZOwJAZFI1SJaBDRnZteJEWiRRUZhBqlI7WhrQIedqaCQDCKDm/ocKxtgAAAABJRU5ErkJggg==) no-repeat 50% 50%;
+    background-size: 100%;
+}
+
+.productHeader {
+    background-color: rgba(0,0,0,.02);
+    position: relative;
+    padding: 6px;
+    min-height: 33px;
+}
+
+.productTitle {
+    padding-left: 24px;
+}
+
+.productEditor {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+}
+
+.productEditorHide {
+    composes: productEditor;
+    display: none;
+}
+
+.productEditorActive {
+    composes: productEditor;
+    display: block;
+}
+
+.productEditContent {
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+    background-color: rgba(0,0,0,.02);
+    padding: 6px;
+}
+
+.productEditHide {
+    display: none;
+    composes: productEditContent;
+}
+
+.productEditActive {
+    display: block;
+    composes: productEditContent;
+}
+
+.productAddBtn {
+    position: absolute;
+    bottom: 0;
+}
+
+.productsBox {
+    padding-bottom: 32px;
+}
+
+.productArea {
+    margin: 12px 0;
+}
+
+.productAreaDragging {
+    opacity: .4;
+    margin-bottom: 10px;
+    border: 1px dashed #ccc;
+}
+
+.removeBtn {
+    cursor: pointer;
+}

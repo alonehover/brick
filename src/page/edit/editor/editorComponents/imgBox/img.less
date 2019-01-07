@@ -1,0 +1,78 @@
+.dragTag {
+    position: absolute;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    cursor: move;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAPlJREFUWAljYBgFAxwCzCTYzwRUawnEmkD8HIh/AzEy4AJyHIFYHIifAvF/ICYIWAiqQCiIAjK9oFx7IF2NkAKzQHxFqBiIXgpl46VAviIW6CEpBFnAi8QHsWGWg4T1keTwMklxwCUkk+4D2Z+R+CA2SAwGkNXCxCimQY61AmI3IAbFNzoAibkDMUgNKR5DN2eE8YdtNlQCRuQSYiKTlMRCSjZEVovXHaQ4ADlrDdpsCMqio9kQb5yjS45mQ1JyAXLWIlQbIqtFD3UUPikOGM2GKEE3bDjUzoZOwJAZFI1SJaBDRnZteJEWiRRUZhBqlI7WhrQIedqaCQDCKDm/ocKxtgAAAABJRU5ErkJggg==) no-repeat 50% 50%;
+    background-size: 100%;
+}
+
+.imgHeader {
+    background-color: rgba(0,0,0,.02);
+    position: relative;
+    padding: 6px;
+    min-height: 33px;
+}
+
+.imgTitle {
+    padding-left: 24px;
+}
+
+.imgEditor {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+}
+
+.imgEditorHide {
+    composes: imgEditor;
+    display: none;
+}
+
+.imgEditorActive {
+    composes: imgEditor;
+    display: block;
+}
+
+.imgEditContent {
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+    background-color: rgba(0,0,0,.02);
+    padding: 6px;
+}
+
+.imgEditHide {
+    display: none;
+    composes: imgEditContent;
+    height: 0;
+}
+
+.imgEditActive {
+    display: block;
+    composes: imgEditContent;
+    height: 270px;
+}
+
+.imgAddBtn {
+    position: absolute;
+    bottom: 0;
+}
+
+.imgsBox {
+    padding-bottom: 32px;
+}
+
+.imgArea {
+    margin: 12px 0;
+}
+
+.imgAreaDragging {
+    opacity: .4;
+    margin-bottom: 10px;
+    border: 1px dashed #ccc;
+}
+
+.removeBtn {
+    cursor: pointer;
+}

@@ -25,6 +25,12 @@ export default class HomeStore {
         this.brickBuildList = data;
     }
 
+    @action
+    replaceEditorBox(data, key) {
+        let editBrick = this.editBrick;
+        this.brickListStyle[editBrick.id][key] = data;
+    }
+
     // 清除拖拽未加入的组件
     @action
     handleLastBrick(id) {
@@ -69,6 +75,8 @@ export default class HomeStore {
             this.brickBuildList = this.brickBuildList.filter(item => {
                 return item.id !== this.toolFixedOpsition.brickId;
             });
+            this.editBrick = null;
+            delete this.brickBuildList[this.toolFixedOpsition.brickId];
             this.toolFixedOpsition = {
                 brickId: "",
                 style: {
@@ -105,6 +113,7 @@ export default class HomeStore {
     changeArrayParams(value, key, index) {
         let editBrick = this.editBrick,
             styleArray = this.brickListStyle[editBrick.id][key];
+        console.log(key, index, "key, index");
         styleArray[index] = value;
     }
 
@@ -125,20 +134,14 @@ export default class HomeStore {
         switch(type) {
         case "Image":
             brickListStyle[id] = {
-                src: "",
-                href: "",
+                imgs: [{
+                    title: "Banner Ttitle",
+                    src: "http://promotion.administration.qa1.tff.com/static_html/common/img/lazy.png",
+                    href: "#",
+                    appRouter: "/app/home",
+                    reactKey: `react_${new Date().valueOf()}`
+                }],
                 style: {
-                    height: "auto",
-                    width: "100%",
-                    paddingTop: "0",
-                    paddingRight: "0",
-                    paddingBottom: "0",
-                    paddingLeft: "0",
-                    marginTop: "0",
-                    marginRight: "0",
-                    marginBottom: "0",
-                    marginLeft: "0",
-                    backGroundColor: "#fff"
                 }
             };
             break;
@@ -171,8 +174,34 @@ export default class HomeStore {
                     reactKey: `react_${new Date().valueOf()}2`
                 }],
                 style: {
-                    height: "auto",
-                    width: "100%",
+                    backgroundSize: "cover"
+                }
+            };
+            break;
+        case "ProductL":
+            brickListStyle[id] = {
+                products: [{
+                    title: "Product Title",
+                    productId: "",
+                    reactKey: `react_${new Date().valueOf()}1`
+                }],
+                style: {
+                    backgroundSize: "cover"
+                }
+            };
+            break;
+        case "ProductM":
+            brickListStyle[id] = {
+                products: [{
+                    title: "Product Title",
+                    productId: "",
+                    reactKey: `react_${new Date().valueOf()}1`
+                }, {
+                    title: "Product Title",
+                    productId: "",
+                    reactKey: `react_${new Date().valueOf()}2`
+                }],
+                style: {
                     backgroundSize: "cover"
                 }
             };

@@ -9,10 +9,10 @@ class Image extends React.Component {
 
     render() {
         const { homeStore, id } = this.props;
-        const {src, style} = homeStore.brickListStyle[id];
+        const {imgs, style} = homeStore.brickListStyle[id];
         return (
-            <div className="block-image">
-                <img src={src} style={{...style}} alt="Image" />
+            <div className="block-image" style={{...style}}>
+                <img src={imgs[0].src}  alt="Image" />
             </div>
         );
     }
